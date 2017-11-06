@@ -1,0 +1,50 @@
+body {
+    background: url(../images/yys_bg.jpg);
+}
+
+.slider-box {
+    position: absolute;
+    width: 720px;
+    height: 520px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    perspective: 1000px;
+}
+
+.slider-event-panel {
+    position: absolute;
+    width: 1120px;
+    height: 520px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+}
+
+.left-img {
+    position: absolute;
+    transform: translateX(-200px) rotateY(30deg) scale(.7);
+    transition: all .5s ease;
+}
+
+.right-img {
+    position: absolute;
+    transform: translateX(200px) rotateY(-30deg) scale(.7);
+    transition: all .5s ease;
+}
+
+.middle-img {
+    position: absolute;
+    z-index: 3;
+    transition: all .5s ease;
+}
+
+.behind-img {
+    position: absolute;
+    transform: translateX(0px) scale(.5);
+    transition: all .5s ease;
+}

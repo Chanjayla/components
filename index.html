@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/slider.js"></script>
+</head>
+
+<body>
+    <div id="sliderBox"></div>
+    <div id="eventPanel" style="z-index:4;"></div>
+    <script>
+        var obj = new SliderObj({
+            imgNum: 4,
+            imgArr: ['images/yys_banner1.jpg', 'images/yys_banner2.jpg', 'images/yys_banner3.jpg', 'images/yys_banner4.jpg'],
+            focusStyle: '',
+            blurStyle: '',
+            boxId: 'sliderBox', //显示板块
+            eventPanel: 'eventPanel' //鼠标事件捕获板
+        });
+    </script>
+</body>
+
+</html>
