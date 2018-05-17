@@ -1,0 +1,55 @@
+
+.slider-box {
+    position: relative;
+    width: 22rem;
+    height: 22rem;
+    padding-bottom: 2rem;
+}
+.slider-box img {
+    width:100%;
+}
+.slider-event-panel {
+    display: none;
+}
+
+.left-img {
+    position: absolute;
+    width: 65%;
+    z-index: 0;
+    left: 0;
+    top:10px;
+    opacity: .6;
+    transform: scale(.9);
+    transition: all .5s ease;
+}
+
+.right-img {
+    position: absolute;
+    width: 65%;
+    z-index: 0;
+    left: 36%;
+    top:10px;
+    opacity: .6;
+    transform:  scale(.9);
+    transition: all .5s ease;
+}
+
+.middle-img {
+    position: absolute;
+    width: 65%;
+    left: 18%;
+    top:0px;
+    z-index: 1;
+    transition: all .5s ease;
+}
+
+.behind-img {
+    position: absolute;
+    width:65%;
+    transform: scale(.8);
+    z-index:-1;
+    left:20%;
+    top: 10px;
+    visibility: hidden;
+    transition: all .5s ease;
+}

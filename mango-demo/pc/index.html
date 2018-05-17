@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mango</title>
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="bodyDiv" style="vertical-align: baseline;transform:translateY(0%);transition:all .7s ease;">
+        <div style="height:100%;background:url(images/bg_1.jpg) 50% 50% no-repeat;min-height:972px;">
+            <div class="top-label">
+                <div class="top-div">
+                    <div>
+                        <img src="images/logo.png">
+                    </div>   
+                    <ul class="top-nav">
+                        <li><a href="#">หน้าแรก</a></li>
+                        <li><a href="#2" onclick="globalApi.changePage(2)">เกมส์มือถือ</a></li>
+                        <li><a href="#3" onclick="globalApi.changePage(3)">คลับ</a></li>
+                        <li><a href="/home/index/about">เกี่ยวกับเรา</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-box box-1">
+                <div class="slide-box" >
+                    <div id="sliderBox"></div> 
+                    <div id="eventPanel" style="z-index:4;"></div>  
+                    <div id="slidePagination" class="slide-page">
+    
+                    </div>
+                </div>
+                <div class="download-box">
+                    <div class="download-logo">
+                        <img src="images/mangogame-144.png">
+                    </div>
+                    <div class="download-title">
+                        <img src="images/MangoGames.png">
+                    </div>
+                    <div  class="download-btn">
+                        <a href="#"><img onmouseover="btnHover(0,this)" onmouseleave="btnLeave(0,this)" src="images/apk.png"></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.mango.game"><img onmouseover="btnHover(1,this)" onmouseleave="btnLeave(1,this)" src="images/android.png"></a>
+                    </div>
+                    <div>
+                        <div class="code-border">
+                            <img src="images/default_code.png" >
+                            <!-- <div class="qr-code" id="QRCode"></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background:url(images/bg_2.jpg) 50% 50% no-repeat;height:100%;min-height:972px;">
+            <div class="content-box box-2">
+                <div class="box-2-photo">
+                    <img class="box-2-photo-1" src="images/page2_1.png">
+                    <img class="box-2-photo-2" src="images/page2_2.png">
+                </div>
+                <div class="title-2">
+                    <div>
+                        <img src="images/page2_title.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background:url(images/bg_3.jpg) 50% 50% no-repeat;height:100%;min-height:972px;">
+            <div class="content-box box-3">
+                <div class="box-3-photo" >
+                    <img class="box-3-photo-1" src="images/page3_1.png">
+                    <img class="box-3-photo-2" src="images/page3_ground.png">
+                    <img class="box-3-photo-3" src="images/page3_2.png">
+                </div>
+                <div class="title-3">
+                    <div>
+                        <img src="images/page3_title.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background:url(images/bg_4.jpg) 50% 50% no-repeat;height:100%;min-height:972px;">
+            <div class="content-box box-4">
+                <div class="box-4-photo">
+                    <img class="box-4-photo-1" src="images/page4_ground1.png">
+                    <img class="box-4-photo-2" src="images/page4_ground2.png">
+                    <img class="box-4-photo-3" src="images/page4_2.png">
+                    <img class="box-4-photo-4" src="images/page4_3.png">    
+                    <img class="box-4-photo-5" src="images/page4_1.png">
+                </div>
+                <div class="title-4">
+                    <div>
+                        <img src="images/page4_title.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background:url(images/bg_5.jpg) 50% 50% no-repeat;height:100%;min-height:972px;">
+            <div class="content-box box-5">
+                <div class="box-5-photo">
+                    <img class="box-5-photo-1" src="images/page5_light.png">
+                    <img class="box-5-photo-2" src="images/page5_2.png">
+                    <img class="box-5-photo-3" src="images/page5_3.png">
+                    <img class="box-5-photo-4" src="images/page5_1.png">
+                </div>
+                <div class="title-5">
+                    <div>
+                        <img src="images/page5_title.png">
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li><a href="https://www.facebook.com/Mangogames-157817974891202/?modal=admin_todo_tour"><img src="images/footer_1.png"><br><span>ติดตามเรา</span></a></li>
+                    <li><a href="/home/index/terms"><img src="images/footer_2.png"><br><span>เงื่อนไขการให้บริการ</span></a></li>
+                    <li><a href="/home/index/privacy"><img src="images/footer_3.png"><br><span>นโยบายความเป็นส่วนตัว</span></a></li>
+                    <li><a href="/home/index/about"><img src="images/footer_4.png"><br><span>เกี่ยวกับเรา</span></a></li>
+                </ul>
+                <div class="footer-logo"><img src="images/footer_logo.png"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/slider.js"></script>
+    <script>
+        var globalApi = (function(doc,win) { 
+            var translateY = 0;
+            var isScrolling = false;
+            var timer = -1;
+            var pageIdx = 0;
+            function beforeChangePage() {
+                switch(pageIdx) {
+                    case 0:sliderObj.stopLoop();break;
+                    case 1:break;
+                    case 2:break;
+                    case 3:break;
+                    case 4:break;
+                }
+            }
+            function afterChangePage() {
+                switch(pageIdx) {
+                    case 0:sliderObj.restartLoop();break;
+                    case 1:
+                        doc.getElementsByClassName('box-2-photo-1')[0].className='box-2-photo-1 box-2-photo-1-active';
+                        doc.getElementsByClassName('box-2-photo-2')[0].className='box-2-photo-2 box-2-photo-2-active';
+                        break;
+                    case 2:
+                        doc.getElementsByClassName('box-3-photo')[0].className = 'box-3-photo box-3-photo-active';
+                        break;
+                    case 3:
+                        doc.getElementsByClassName('box-4-photo')[0].className = 'box-4-photo box-4-photo-active';
+                        break;
+                    case 4:
+                        doc.getElementsByClassName('box-5-photo')[0].className = 'box-5-photo box-5-photo-active';
+                        break;
+                }
+            }
+            var wheelFunc = function(direct) {
+                if(!isScrolling) {
+                    clearTimeout(timer);  
+                    beforeChangePage();
+                    if(direct > 0) {
+                        translateY = translateY - 20 >= -80 ? (translateY - 20) : -80;
+                        doc.getElementById('bodyDiv').style.transform = 'translateY('+translateY+'%)';
+                    } else {
+                        translateY = translateY + 20 <= 0 ? (translateY + 20) : 0;
+                        doc.getElementById('bodyDiv').style.transform = 'translateY('+translateY+'%)';
+                    }  
+                    pageIdx = translateY / -20;
+                    afterChangePage();
+                    isScrolling = true;
+                    timer = setTimeout(function() {
+                        isScrolling = false;
+                    },700);
+                }   
+            }
+            function changePage(pageIndex) {
+                beforeChangePage();
+                pageIdx = pageIndex;
+                translateY = pageIdx * -20;
+                doc.getElementById('bodyDiv').style.transform = 'translateY('+translateY+'%)';
+                afterChangePage();
+            }
+            doc.addEventListener('mousewheel',function(event) {
+                if(event.deltaY > 0) {
+                    wheelFunc(1);
+                } else {
+                    wheelFunc(-1);
+                }
+            },false);
+            doc.addEventListener('DOMMouseScroll',function(event) {
+                if(event.detail > 0) {
+                    wheelFunc(1);
+                } else {
+                    wheelFunc(-1);
+                }
+            })
+            win.addEventListener('load',function() {
+                doc.getElementsByClassName('slide-box')[0].className = 'slide-box slide-box-active';
+                if(location.href.split('#').length>1) {
+                    var pageIndex = parseInt(location.href.split('#')[1]) || 0;
+                    changePage(pageIndex);
+                }
+            });
+            var sliderObj = new SliderObj({
+                imgNum: 4,
+                imgArr: ['images/page1_1.png', 'images/page1_2.png', 'images/page1_3.png','images/page1_4.png'],
+                focusStyle: '',
+                blurStyle: '',
+                boxId: 'sliderBox', //显示板块
+                pageId: 'slidePagination',
+                eventPanel: 'eventPanel' //鼠标事件捕获板
+            });
+            return {
+                changePage : changePage,
+                sliderObj : sliderObj
+            }
+        })(document,window);
+        
+        var apkImgs = ['images/apk.png','images/apk_hover.png'];
+        var androidImgs = ['images/android.png','images/android_hover.png'];
+        function btnHover(type,target) {
+           if(type==0) {
+               target.src = apkImgs[1];
+           } else {
+               target.src = androidImgs[1];
+           }
+        }
+        
+        function btnLeave(type,target) {
+            if(type==0) {
+               target.src = apkImgs[0];
+           } else {
+               target.src = androidImgs[0];
+           }
+        }
+        </script>
+</body>
+</html>

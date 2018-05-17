@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mango</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
+    <link rel="stylesheet" href="css/slider.mobile.css">
+</head>
+<body touchstart>  
+    
+    <div id="containDiv">
+        <div class="page-1 page-common">
+            <div class="logo">
+                <img src="images/logo.png" alt="">
+            </div>
+            <div id="sliderBox"></div> 
+            <div id="eventPanel" style="display:none;"></div>  
+            <div id="slidePagination" class="slide-page"></div>
+            <div class="btn-box">
+                <a href="#"><img src="images/download_btn.png" alt=""></a>
+            </div>
+        </div>
+        <div class="page-2 page-common">
+            <img class="bg-img" src="images/page2_1.png">
+            <img class="bg-text" src="images/page2_2.png">
+        </div>
+        <div class="page-3 page-common">
+            <img class="bg-img" src="images/page3_1.png">
+            <img class="bg-text" src="images/page3_2.png">
+        </div>
+        <div class="page-4 page-common">
+            <img class="bg-img" src="images/page4_1.png">
+            <img class="bg-text-2" src="images/page4_2.png">
+        </div>
+        <div class="page-5 page-common">
+            <img class="bg-img" src="images/page5_1.png">
+            <img class="bg-text-2 bg-text-last" src="images/page5_2.png">
+            <div class="btn-box">
+                <a href=""><img src="images/download_btn2.png" ></a>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.mango.game" ontouchend="location.href='https://play.google.com/store/apps/details?id=com.mango.game'"><img src="images/btn1.png" alt="follow"></a><br><span>ติดตามเรา</span></li>
+                    <li><a href="" ontouchend="location.href=''"><img src="images/btn2.png" alt="terms"></a><br><span>เงื่อนไขการให้บริการ</span></li>
+                    <li><a href="" ontouchend="location.href=''"><img src="images/btn3.png" alt="privacy"></a><br><span>นโยบายความเป็นส่วนตัว</span></li>
+                    <li><a href="" ontouchend="location.href=''"><img src="images/btn4.png" alt="about"></a><br><span>เกี่ยวกับเรา</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="test" style="position: fixed;left: 0px; top: 0px;"></div> -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.3.2.min.js"></script>
+    <script src="js/slider.mobile.js"></script>
+    <script>
+    var globalApi = (function(doc,win) {
+        var moveFlag = false;
+        var body = doc.body,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientHeight = body.clientHeight + 70;  
+                var clientWidth = body.clientWidth;  
+                $('#containDiv').css("height",clientHeight*5+'px')
+               // $('#sliderBox').css('height',clientWidth*1.15+'px');
+                $(body).css('font-size',clientWidth/320*12+'px');
+                $('.page-common').css('height',(clientHeight-70)+'px');
+                if(location.href.split('#').length>1) {
+                    var pageIndex = parseInt(location.href.split('#')[1]) || 0;
+                    moveFlag = true;
+                    changePage(pageIndex);
+                }
+                try {navigator.control.gesture(false);} catch (e) {} 
+            };
+        $(win).on(resizeEvt, recalc);
+        $(doc).on('ready', recalc);
+        var startY,startX,moveEndX,moveEndY;
+        var pageIdx = 0;
+        $(document).on("touchstart", function(e) {
+            moveFlag = true;
+            e.preventDefault();
+            //$("#test").text("touchstart");    
+            startY = e.originalEvent.changedTouches[0].pageY;
+            startX = e.originalEvent.changedTouches[0].pageX;
+            return false;
+        });
+        $(document).on('touchmove',function(e){
+            e.preventDefault(); 
+            moveEndY = e.originalEvent.changedTouches[0].pageY;
+            var Y = moveEndY - startY;
+            //$("#test").text("touchmove"+Y);    
+            if( Y > 20) {
+                var idx = pageIdx - 1>=0?pageIdx-1:0;
+                changePage(idx);
+            }
+        });
+        $(document).on("touchend", function(e) {     
+            //$("#test").text("end");    
+            e.preventDefault();             
+            moveEndX = e.originalEvent.changedTouches[0].pageX;
+            moveEndY = e.originalEvent.changedTouches[0].pageY;
+            var Y = moveEndY - startY;
+            var X = moveEndX - startX;
+            if( X > 30) {//右划
+                sliderObj.switch(-1);
+            } else if( X  < -30) { //
+                sliderObj.switch(1);
+            }
+            //下滑
+            if ( Y > 50) {
+                var idx = pageIdx - 1>=0?pageIdx-1:0;
+                changePage(idx);
+            }
+            //上滑
+            else if ( Y < -50 ) {
+                var idx =  pageIdx + 1<=4?pageIdx+1:4;
+                changePage(idx);
+            }
+            return false;
+        });
+        function beforeChangePage() {
+            if(pageIdx === 0) {
+                sliderObj.stopLoop();
+            }
+        }
+        function afterChangePage() {
+            if(pageIdx ===0) {
+                sliderObj.restartLoop();
+            }
+        }
+        function changePage(pageIndex) {
+            if(moveFlag) {
+                moveFlag = false;
+                beforeChangePage();
+                pageIdx = pageIndex;
+                $('#containDiv').css('transform','translateY(-'+(20*pageIdx)+'%');
+                $('#containDiv').css('-webkit-transform','translateY(-'+(20*pageIdx)+'%');
+                afterChangePage();
+            }     
+        }
+        var sliderObj = new SliderObj({
+            imgNum: 4,
+            imgArr: ['images/slide1.png', 'images/slide2.png', 'images/slide3.png','images/slide4.png'],
+            focusStyle: '',
+            blurStyle: '',
+            boxId: 'sliderBox', //显示板块
+            pageId: 'slidePagination',
+            eventPanel: 'eventPanel' //鼠标事件捕获板
+        });
+        
+        return {
+            sliderObj : sliderObj,
+            changePage : changePage
+        }
+    }(document,window));
+
+    </script>
+</body>
+</html>
