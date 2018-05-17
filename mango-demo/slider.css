@@ -1,0 +1,77 @@
+
+.slider-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.slider-box img {
+    width:100%;
+}
+.slider-event-panel {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    left: 0px;
+    top: 0px;
+}
+
+.left-img {
+    position: absolute;
+    width: 65%;
+    z-index: 0;
+    left: 0;
+    top:10px;
+    opacity: .6;
+    transform: scale(.9);
+    transition: all .5s ease;
+}
+
+.right-img {
+    position: absolute;
+    width: 65%;
+    z-index: 0;
+    left: 36%;
+    top:10px;
+    opacity: .6;
+    transform:  scale(.9);
+    transition: all .5s ease;
+}
+
+.middle-img {
+    position: absolute;
+    width: 65%;
+    left: 18%;
+    top:0px;
+    z-index: 1;
+    transition: all .5s ease;
+}
+
+.behind-img {
+    position: absolute;
+    width:65%;
+    transform: scale(.8);
+    z-index:-1;
+    left:20%;
+    top: 10px;
+    visibility: hidden;
+    transition: all .5s ease;
+}
+
+.slide-page {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    z-index: 9;
+    margin:15px auto;
+    text-align: center;
+}
+.slide-page span {
+    display:inline-block;
+    width: 20px;
+    height: 8px;
+    border-radius: 5px;
+    background: #fec58e;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.slide-page .page-active {background: #fff;}
