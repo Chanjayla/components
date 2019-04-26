@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widlh=device-widlh, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mobile官网框架demo</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="js/swiper.min.js"></script>
+</head>
+
+<body>
+    <header class="head-bar">
+        <a href="" class="sprites head-logo"></a>
+        <a href="javascript:void(0)" class="head-nav-btn">
+            <i></i>
+            <i></i>
+            <i></i>
+        </a>
+    </header>
+    <div class="nav-list">
+        <ul>
+            <li><a href="">首页</a></li>
+            <li class="with-sub">
+                <a>关于我们</a>
+                <dl>
+                    <dd><a>企业简介</a></dd>
+                    <dd><a>发展历程</a></dd>
+                    <dd><a>旗下品牌</a></dd>
+                    <dd><a>企业文化</a></dd>
+                </dl>
+            </li>
+            <li class="with-sub">
+                <a>公司咨询</a>
+                <dl>
+                    <dd><a>企业文化</a></dd>
+                    <dd><a>员工风采</a></dd>
+                </dl>
+            </li>
+            <li><a href="">xxx官网</a></li>
+            <li><a href="">xx论坛</a></li>
+            <li><a href="">加入我们</a></li>
+            <li><a href="">联系我们</a></li>
+        </ul>
+    </div>
+    <footer class="foot-bar">
+        <div class="copyright-links">
+            <a href="">关于我们</a>
+            <a href="">联系我们</a>
+            <a href="">人才招聘</a>
+            <a href="">家长监护</a>
+        </div>
+        <p>公司名称：xxx公司 注册地址：xxx市xxx区xxx楼 联系地址：xxx市xxx区xxx楼 联系电话：xxx-xxxxxxx</p>
+        <br />
+        <p>© Copyright 2019 - 2020 xxx Network</p>
+        <p>Technology Co.,Ltd.All Right Reserved</p>
+    </footer>
+    <script>
+        $(function () {
+            var headNavShow = false,navHideTimer = -1;
+            $('.head-nav-btn').on('click', function () {
+                if (headNavShow) {
+                    headNavShow = false;
+                    $(this).removeClass('head-nav-btn-active');
+                    $('.nav-list').removeClass('nav-anim-show').addClass('nav-anim-hide');
+                    navHideTimer = setTimeout(function () {
+                        $('.nav-list').hide();
+                    }, 500);
+                } else {
+                    clearTimeout(navHideTimer);
+                    headNavShow = true;
+                    $(this).addClass('head-nav-btn-active');
+                    $('.nav-list').show().removeClass('nav-anim-hide').addClass('nav-anim-show');
+                }
+            });
+            $('.with-sub').on('click', function () {
+                var subNum = $(this).find('dd').length;
+                if ($(this).hasClass('show-sub')) {
+                    $(this).removeClass('show-sub');
+                    $(this).find('dl').css({
+                        height: 0
+                    });
+                } else {
+                    $(this).addClass('show-sub');
+                    $(this).find('dl').css({
+                        height: 0.88 * subNum + 'rem'
+                    });
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>
