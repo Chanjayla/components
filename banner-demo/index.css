@@ -1,0 +1,70 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+.banner-box {
+    position: relative;
+    width: 100%;
+    min-width: 1200px;
+}
+.banner-poster {
+    background: #021341;
+    height:950px;
+}
+.banner {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1920px;
+    height: 950px;
+    overflow:hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: opacity .3s ease-in-out;
+    transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+
+.banner-box .left-arrow {
+    position: absolute;
+    left: 0;
+    top: 440px;
+    margin: auto;
+    cursor: pointer;
+}
+.banner-box .right-arrow {
+    position: absolute;
+    right: 0;
+    top: 440px;
+    margin: auto;
+    cursor: pointer;
+}
+.banner-box .buoy-box {
+    position: relative;
+    top: -240px;
+    width: 1200px;
+    height: 6px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+}
+.banner-box .buoy {
+    height: 8px;
+}
+.banner-box .buoy-box span {
+    display: inline-block;
+    width: 50px;
+    height: 60px;
+    margin: 0 10px;
+    background: #999;
+    background: rgba(0,0,0,.3);
+    cursor: pointer; 
+    font-size: 0;
+}
+.banner-box .buoy-box .active {
+    background: #00a2ff;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生banner demo</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="banner-box">
+        <div class="banner-poster">
+            <div id="banner" class="banner">
+
+            </div>
+            <img id="banner_left" class="left-arrow" src="img/left.png">
+            <img id="banner_right" class="right-arrow" src="img/right.png">
+            <div class="buoy-box">
+                <div class="buoy" id="banner_buoy"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var banner_list = (function () {
+            return {
+                index: 0,
+                maxNum: 0,
+                bannerTimer: -1,
+                init: function (config) {
+                    this.el = config.el;
+                    this.leftArrow = config.leftArrow;
+                    this.rightArrow = config.rightArrow;
+                    this.bannerData = config.bannerData.slice(0, 5);
+                    this.maxNum = this.bannerData.length || 0;
+                    var that = this;
+                    this.el.style.backgroundImage = 'url(' + this.bannerData[this.index].img + ')';
+                    if (config.buoyEl) {
+                        this.buoyEl = config.buoyEl;
+                        var content = '';
+                        for (var i = 0; i < this.bannerData.length; ++i) {
+                            if (i == this.index) {
+                                content += '<span id="banner_buoy_' + i + '" class="active"></span>';
+                            } else {
+                                content += '<span id="banner_buoy_' + i + '"></span>';
+                            }
+                        }
+                        this.buoyEl.innerHTML = content;
+                    }
+                    this.leftArrow.addEventHandler = this.leftArrow.addEventListener || this.leftArrow.attachEvent;
+                    this.rightArrow.addEventHandler = this.rightArrow.addEventListener || this.rightArrow.attachEvent;
+                    this.buoyEl.addEventHandler = this.buoyEl.addEventListener || this.buoyEl.attachEvent;
+                    var eventName = document.addEventListener ? 'click' : 'onclick';
+                    this.leftArrow.addEventHandler(eventName, function (event) {
+                        document.getElementById('banner_buoy_' + that.index).className = '';
+                        that.index = that.index - 1 >= 0 ? (that.index - 1) : (that.maxNum - 1);
+                        document.getElementById('banner_buoy_' + that.index).className = 'active';
+                        that.el.style.opacity = '0';
+
+                        clearTimeout(that.bannerTimer);
+                        setTimeout(function () {
+                            that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                            that.el.style.opacity = '1';
+                            that.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                        }, 300);
+                    });
+                    this.rightArrow.addEventHandler(eventName, function (event) {
+                        clearTimeout(that.bannerTimer);
+                        document.getElementById('banner_buoy_' + that.index).className = '';
+                        that.index = that.index + 1 >= that.maxNum ? 0 : (that.index + 1);
+                        document.getElementById('banner_buoy_' + that.index).className = 'active';
+                        that.el.style.opacity = '0';
+                        clearTimeout(that.bannerTimer);
+                        setTimeout(function () {
+                            that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                            that.el.style.opacity = '1';
+                            that.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                        }, 300);
+                    });
+                    this.buoyEl.addEventHandler(eventName, function (event) {
+                        clearTimeout(that.bannerTimer);
+                        var event = event || window.event,
+                            target = event.target || event.srcElement;
+                        if (target.tagName.toLocaleLowerCase() == 'span') {
+                            document.getElementById('banner_buoy_' + that.index).className = '';
+                            that.index = parseInt(target.id.split('_')[2]);
+                            document.getElementById('banner_buoy_' + that.index).className = 'active';
+                            that.el.style.opacity = '0';
+                            clearTimeout(that.bannerTimer);
+                            setTimeout(function () {
+                                that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                                that.el.style.opacity = '1';
+                                that.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                            }, 300);
+                        }
+                    });
+                    if (this.bannerData.length > 1) {
+                        this.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                    }
+                },
+                loopBanner: function () {
+                    var that = this;
+                    document.getElementById('banner_buoy_' + that.index).className = '';
+                    that.index = that.index + 1 >= that.maxNum ? 0 : (that.index + 1);
+                    document.getElementById('banner_buoy_' + that.index).className = 'active';
+                    that.el.style.opacity = '0';
+                    setTimeout(function () {
+                        that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                        that.el.style.opacity = '1';
+                    }, 300);
+                    this.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                }
+            }
+        })()
+        banner_list.init({
+            el: document.getElementById('banner'),
+            leftArrow: document.getElementById('banner_left'),
+            rightArrow: document.getElementById('banner_right'),
+            bannerData: [{
+                img: 'img/CN-wp1.jpg'
+            },{
+                img: 'img/CN-wp2.jpg'
+            },{
+                img: 'img/CN-wp3.jpg'
+            },{
+                img: 'img/CN-wp4.jpg'
+            },{
+                img: 'img/CN-wp5.jpg'
+            },{
+                img: 'img/CN-wp6.jpg'
+            }],
+            buoyEl: document.getElementById('banner_buoy')
+        });
+
+    </script>
+</body>
+
+</html>
