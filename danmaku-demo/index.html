@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>弹幕</title>
+    <style>
+    .video-box {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        margin: auto;
+    }
+    #videoEle {
+        width: 100%;
+        height: 100%;
+    }
+    .danmaku-box {
+        position:absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    .danmu {
+        width: 
+    }
+    </style>
+</head>
+<body>
+    <div class="video-box">
+        <video src="test.mp4" id="videoEle" controls></video>
+        <div class="danmaku-box">
+            
+        </div>
+    </div>
+    
+    <script>
+    console.dir(document.getElementById('videoEle'));
+    function Danmaku() {
+        this.data = [];
+        this.el = null;
+        this.config = {
+            maxNum: 100,
+            nowNum: 0
+        }
+    }
+    Danmaku.prototype = {
+        init: function(config) {
+            this.el = config.el;
+            this.data = config.data;
+            this.config = extend(this.config,config);
+        },
+        add: function() {
+            var danmu = document.createElement('div');
+        }
+    }
+
+    function extend(obja,objb) {
+        for(var key in obja) {
+            obja[key] = objb[key] || obja[key];
+        }
+        return obja;
+    }
+    </script>
+</body>
+</html>
