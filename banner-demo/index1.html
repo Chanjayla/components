@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="index1.css">
+</head>
+
+<body>
+    <div class="banner-box">
+        <div class="banner-poster">
+            <div id="banner" class="banner">
+                <div class="message" id="bannerMsg">
+                    <h1>xxx</h1>
+                    <h2>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h2>
+                    <div class="link">
+                        <a href="" class="sprites icon-ios-b"></a>
+                        <a href="" class="sprites icon-google-b"></a>
+                    </div>
+                    <a href="" class="btn">
+                        查看详情
+
+                    </a>
+                </div>
+            </div>
+            <img id="banner_left" class="left-arrow" src="img/left.png">
+            <img id="banner_right" class="right-arrow" src="img/right.png">
+            <div class="buoy-box">
+                <div class="buoy" id="banner_buoy"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var banner_list = (function () {
+            return {
+                index: 2,
+                maxNum: 0,
+                bannerTimer: -1,
+                showNum: 5,
+                buoyWidth: 1400,
+                stepWidth: 0,
+                showArr: [0, 1, 2, 3, 4],
+                isScrolling: false,
+                init: function (config) {
+                    this.el = config.el;
+                    this.leftArrow = config.leftArrow;
+                    this.rightArrow = config.rightArrow;
+                    this.bannerData = config.bannerData;
+                    this.maxNum = this.bannerData.length || 0;
+                    this.afterSlide = config.afterSlide || function () { };
+                    this.beforeSlide = config.beforeSlide || function () { };
+                    var that = this;
+                    this.el.style.backgroundImage = 'url(' + this.bannerData[this.index].img + ')';
+                    if (config.buoyEl) {
+                        this.buoyEl = config.buoyEl;
+                        this.stepWidth = this.buoyWidth / (this.showNum + 1);
+                        var content = '';
+                        for (var i = 0; i < this.maxNum; ++i) {
+                            if (i == this.index) {
+                                content += '<div id="banner_buoy_' + i + '" class="active" ><img src="' + this.bannerData[i].icon + '">' + this.bannerData[i].name + '</div>';
+                            } else {
+                                content += '<div id="banner_buoy_' + i + '" style="transform: translateX(' + (-600 + i * 300) + 'px);"><img src="' + this.bannerData[i].icon + '" >' + this.bannerData[i].name + '</div>';
+                            }
+
+                        }
+                        this.buoyEl.innerHTML = content;
+                    }
+                    this.leftArrow.addEventHandler = this.leftArrow.addEventListener || this.leftArrow.attachEvent;
+                    this.rightArrow.addEventHandler = this.rightArrow.addEventListener || this.rightArrow.attachEvent;
+                    this.buoyEl.addEventHandler = this.buoyEl.addEventListener || this.buoyEl.attachEvent;
+                    var eventName = document.addEventListener ? 'click' : 'onclick';
+                    this.leftArrow.addEventHandler(eventName, function (event) {
+                        if(that.isScrolling) return;
+                        document.getElementById('banner_buoy_' + that.index).className = '';
+                        that.index = that.index - 1 >= 0 ? (that.index - 1) : (that.maxNum - 1);
+                        document.getElementById('banner_buoy_' + that.index).className = 'active';
+                        that.el.style.opacity = '0';
+                        that.flushPosition();
+                        clearTimeout(that.bannerTimer);
+                        setTimeout(function () {
+                            that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                            that.el.style.opacity = '1';
+                            that.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                        }, 100);
+                    });
+                    this.rightArrow.addEventHandler(eventName, function (event) {
+                        if(that.isScrolling) return;
+                        document.getElementById('banner_buoy_' + that.index).className = '';
+                        that.index = that.index + 1 >= that.maxNum ? 0 : (that.index + 1);
+                        document.getElementById('banner_buoy_' + that.index).className = 'active';
+                        that.el.style.opacity = '0';
+                        that.flushPosition();
+                        clearTimeout(that.bannerTimer);
+                        setTimeout(function () {
+                            that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                            that.el.style.opacity = '1';
+                            that.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                        }, 100);
+                    });
+                    this.buoyEl.addEventHandler(eventName, function (event) {
+                        if(that.isScrolling) return;
+                        var event = event || window.event,
+                            target = event.target || event.srcElement;
+                        if (target.tagName.toLocaleLowerCase() == 'img') target = target.parentNode;
+                        if (target.id == 'banner_buoy') return ;
+                        document.getElementById('banner_buoy_' + that.index).className = '';
+                        that.index = parseInt(target.id.split('_')[2]);
+                        document.getElementById('banner_buoy_' + that.index).className = 'active';
+                        that.el.style.opacity = '0';
+                        that.flushPosition();
+                        clearTimeout(that.bannerTimer);
+                        setTimeout(function () {
+                            that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                            that.el.style.opacity = '1';
+                            that.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                        }, 100);
+                    });
+                    if (this.bannerData.length > 1) {
+                        this.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                    }
+                },
+                loopBanner: function () {
+                    var that = this;
+                    document.getElementById('banner_buoy_' + that.index).className = '';
+                    that.index = that.index + 1 >= that.maxNum ? 0 : (that.index + 1);
+                    document.getElementById('banner_buoy_' + that.index).className = 'active';
+                    that.el.style.opacity = '0';
+                    that.flushPosition();
+                    setTimeout(function () {
+                        that.el.style.background = 'url(' + that.bannerData[that.index].img + ')';
+                        that.el.style.opacity = '1';
+                    }, 100);
+                    this.bannerTimer = setTimeout(that.loopBanner.bind(that), 5000);
+                },
+                flushPosition: function () {
+                    this.beforeSlide();
+                    var that = this;
+                    that.isScrolling = true;
+                    this.showArr.map(function (val, idx) {
+                        that.showArr[idx] = that.index - 2 + idx;
+                        if (that.index - 2 + idx < 0) {
+                            that.showArr[idx] = that.maxNum + that.index - 2 + idx;
+                        }
+                        if (that.index - 2 + idx >= that.maxNum) {
+                            that.showArr[idx] = that.index - 2 + idx - that.maxNum;
+                        }
+                    });
+                    this.bannerData.forEach(function (val, idx) {
+                        var pos = that.showArr.indexOf(idx);
+                        var dom = document.getElementById('banner_buoy_' + idx);
+                        if (pos != -1) {
+                            dom.style.opacity = 1;
+                            dom.style.transform = 'translateX(' + (-600 + pos * 300) + 'px)';
+                            dom.style.zIndex = 1;
+                        } else {
+                            dom.style.opacity = 0;
+                            dom.style.transform = 'translateX(0px)';
+                            dom.style.zIndex = -1;
+                        }
+                    });
+                    setTimeout(function() {
+                        that.isScrolling = false;
+                    },300);
+                    this.afterSlide();
+                }
+            }
+        })()
+        banner_list.init({
+            el: document.getElementById('banner'),
+            leftArrow: document.getElementById('banner_left'),
+            rightArrow: document.getElementById('banner_right'),
+            bannerData: [{
+                img: 'img/CN-wp1.jpg',
+                icon: 'img/CN-wp1.png',
+                name: '图1'
+            }, {
+                img: 'img/CN-wp2.jpg',
+                icon: 'img/CN-wp1.png',
+                name: '图2'
+            }, {
+                img: 'img/CN-wp3.jpg',
+                icon: 'img/CN-wp1.png',
+                name: '图3'
+            }, {
+                img: 'img/CN-wp4.jpg',
+                icon: 'img/CN-wp1.png',
+                name: '图4'
+            }, {
+                img: 'img/CN-wp5.jpg',
+                icon: 'img/CN-wp1.png',
+                name: '图5'
+            }],
+            buoyEl: document.getElementById('banner_buoy'),
+            beforeSlide: function () {
+                document.getElementById('bannerMsg').className = 'message message-hide';
+            },
+            afterSlide: function () {
+                setTimeout(function () {
+                    document.getElementById('bannerMsg').className = 'message message-show';
+                }, 500);
+            }
+        });
+
+    </script>
+</body>
+
+</html>

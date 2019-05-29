@@ -1,0 +1,165 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+}
+.banner-box {
+    position: relative;
+    width: 100%;
+    min-width: 1400px;
+}
+.banner-poster {
+    background: #021341;
+    height:1080px;
+}
+.banner {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 100%;
+    height:1080px;
+    overflow:hidden;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transition: all .5s linear;
+    transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+
+.banner-box .left-arrow {
+    position: absolute;
+    left: 0;
+    top: 440px;
+    margin: auto;
+    cursor: pointer;
+}
+.banner-box .right-arrow {
+    position: absolute;
+    right: 0;
+    top: 440px;
+    margin: auto;
+    cursor: pointer;
+}
+.banner-box .buoy-box {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 130px;
+    margin: 0 auto;
+    text-align: center;
+    background: rgba(255,255,255,.5);
+}
+.banner-box .buoy {
+    position: absolute;
+    width: 100%;
+    max-width: 1400px;
+    height: 230px;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.banner-box .buoy div {
+    position: absolute;
+    width: 90px;
+    height: 120px;
+    padding-top: 90px;
+    line-height: 30px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    cursor: pointer; 
+    text-align: center;
+    white-space: nowrap;
+    font-size: 14px;
+    transition: all .3s ease-in-out;
+}
+.banner-box .buoy div img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 88px;
+    height: 88px;
+    transition: all .3s ease;
+}
+
+.banner-box .buoy-box .active {
+    width: 168px;
+    height: 220px;
+    padding-top: 168px;
+    line-height: 52px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.banner-box .buoy-box .active img{
+    width: 168px;
+    height: 168px;
+}   
+
+.banner .message {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 800px;
+    height: 300px;
+    margin: auto;
+    color: #fff;
+    text-align: center;
+    transition: all .3s linear;
+}
+.banner .message-hide {
+    visibility: hidden;
+    top: 200px;
+    opacity: 0;
+}
+.banner .message-show {
+    visibility: visible;
+    top: 0;
+    opacity: 1;
+}
+
+.banner .message h1 {
+    font-weight: bolder;
+    font-size: 87px;
+    text-shadow: 5px 5px 30px #000;
+}
+.banner .message h2 {
+    font-size: 20px;
+    text-shadow: 5px 5px 30px #000;
+}
+.banner .message .link {
+    margin-top: 20px;
+}
+.banner .message .link a {
+    display: inline-block;
+    margin: 0 5px;
+    box-shadow: 5px 5px 10px #bbb;
+    vertical-align: middle;
+}
+.banner .message .btn {
+    display: block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    margin: 30px auto;
+    background: #4067d6;
+    border-radius: 25px;
+    text-align: center;
+    color: #fff;
+}
